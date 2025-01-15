@@ -4,16 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Recommender</title>
+    <!-- Link to Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* Light background */
+            color: #333; /* Darker text for readability */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #007acc; /* Soft blue for the header */
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 5px rgba(0, 122, 204, 0.5); /* Subtle shadow */
+        }
+
+        form {
+            background-color: #ffffff; /* Different card color */
+            padding: 25px 35px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+            text-align: center;
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 20px 12px 45px; /* Extra padding for the icon */
+            border: 1px solid #007acc;
+            border-radius: 30px;
+            font-size: 1rem;
+            background-color: #f9f9f9; /* Slightly off-white for contrast */
+            color: #333; /* Darker text */
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]::placeholder {
+            color: #888; /* Softer placeholder */
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        input[type="text"]:focus {
+            border-color: #005fa3;
+            box-shadow: 0 3px 8px rgba(0, 95, 163, 0.2);
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #007acc;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 20px; /* Soft rounded shape */
+            background-color: #007acc;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 122, 204, 0.2); /* Reduced shadow */
+        }
+
+        button:hover {
+            background-color: #005fa3;
+            box-shadow: 0 6px 12px rgba(0, 95, 163, 0.3);
+        }
+    </style>
 </head>
 <body>
     <h1>MOVIE RECOMMENDER</h1>
     <form action="/recommend" method="POST">
-        <label for="movie">Type or select a movie:</label>
-        <select id="movie" name="movie">
-            {% for movie in movie_list %}
-                <option value="{{ movie }}">{{ movie }}</option>
-            {% endfor %}
-        </select>
+        <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input list="movie-list" id="movie" name="movie" placeholder="Search...">
+            <datalist id="movie-list">
+                {% for movie in movie_list %}
+                    <option value="{{ movie }}"></option>
+                {% endfor %}
+            </datalist>
+        </div>
         <button type="submit">Show Recommendation</button>
     </form>
 </body>
